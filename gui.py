@@ -152,7 +152,7 @@ quick_canv.grid(row=1, column=1, padx=10, pady=5,ipady=5,sticky="nsew"  )
 
 #User Interface Area
 
-speedScale = Scale(UI_frame, from_=0.1, to=5.0, length=200, digits=2, resolution=0.05, orient=HORIZONTAL, label="Select Speed [s]")
+speedScale = Scale(UI_frame, from_=0.01, to=5.0, length=200, digits=2, resolution=0.2, orient=HORIZONTAL, label="Select Speed [s]")
 speedScale.grid(row=0, column=2, padx=5, pady=5,sticky="nsew")
 Button(UI_frame, text="Start", command=StartAlgorithm, bg='red').grid(row=0, column=3, padx=5, pady=5)
 
