@@ -2,13 +2,13 @@ import time
 no_comp = 0
 def merge_sort(data, drawData, timeTick,merge_canv):
     global no_comp
+    no_comp=0
     merge_sort_alg(data,0, len(data)-1, drawData, timeTick,merge_canv)
     return no_comp
 
 def merge_sort_alg(data, left, right, drawData, timeTick,merge_canv):
     global no_comp
     if left < right:
-        no_comp+=1
         middle = (left + right) // 2
         merge_sort_alg(data, left, middle, drawData, timeTick,merge_canv)
         merge_sort_alg(data, middle+1, right, drawData, timeTick,merge_canv)
@@ -25,10 +25,9 @@ def merge(data, left, middle, right, drawData, timeTick,merge_canv):
     leftIdx = rightIdx = 0
 
     for dataIdx in range(left, right+1):
-        no_comp+=1
         if leftIdx < len(leftPart) and rightIdx < len(rightPart):
-            no_comp+=1
             if leftPart[leftIdx] <= rightPart[rightIdx]:
+                no_comp+=1
                 data[dataIdx] = leftPart[leftIdx]
                 leftIdx += 1
             else:

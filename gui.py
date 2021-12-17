@@ -2,9 +2,12 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 import random
+import time
+import threading
 from quicksort import quick_sort
 from mergesort import merge_sort
-import threading
+from multiprocessing.pool import ThreadPool
+
 #variables
 #selected_alg = StringVar()
 dataM = []
@@ -76,16 +79,50 @@ def Generate():
     drawData(dataM, ['red' for x in range(len(dataM))],merge_canv) #['red', 'red' ,....]
     drawData(dataQ, ['red' for x in range(len(dataQ))],quick_canv) #['red', 'red' ,....]
 
-
+def run_quicksort_in_bg():
+    global dataQ
+    start_q =time.time()
+    comps_q=0
+    comps_q=quick_sort(dataQ, 0, len(dataQ)-1, drawData, speedScale.get(),quick_canv,0)
+    root.update_idletasks()
+    time_q= time.time() - start_q
+    drawData(dataQ, ['green' for x in range(len(dataQ))],quick_canv)
+    quick_comp="No of comparisons for Quick Sort is {0}".format(comps_q)
+    quick_time="Runtime Of Quick Sort is {0}".format(time_q)
+    msg=quick_comp+"\n"+quick_time
+    messagebox.showinfo(title="runtime and No of comparisons",message=msg)
+def run_mergesort_in_bg():
+    global dataM
+    start_m = time.time()
+    comps_m=0
+    comps_m=merge_sort(dataM, drawData, speedScale.get(),merge_canv)
+    time_m= time.time() - start_m
+    drawData(dataM, ['green' for x in range(len(dataM))],merge_canv)
+    merge_comp="No of comparisons for Merge Sort is {0}".format(comps_m)
+    merge_time="Runtime Of Merge Sort is {0}".format(time_m)
+    msg=merge_comp+"\n"+merge_time
+    messagebox.showinfo(title="runtime and No of comparisons",message=msg)
 def StartAlgorithm():
     global dataM
     global dataQ
     if (not dataM or not dataQ): return
-    quick_sort(dataQ, 0, len(dataQ)-1, drawData, speedScale.get(),quick_canv)
-    drawData(dataQ, ['green' for x in range(len(dataQ))],quick_canv)
-    comps=merge_sort(dataM, drawData, speedScale.get(),merge_canv)
-    drawData(dataM, ['green' for x in range(len(dataM))],merge_canv)
-    messagebox.showinfo(title="runtime and No of comparisons",message="no of comp is {0}".format(comps))
+    threading.Thread(target=run_mergesort_in_bg).start()
+    threading.Thread(target=run_quicksort_in_bg).start()
+    # start_q =time.time()
+    # comps_q=quick_sort(dataQ, 0, len(dataQ)-1, drawData, speedScale.get(),quick_canv,0)
+    # time_q= time.time() - start_q
+    # drawData(dataQ, ['gr  een' for x in range(len(dataQ))],quick_canv)
+    # q=run_quicksort_in_bg()
+    # start_m = time.time()
+    # comps_m=merge_sort(dataM, drawData, speedScale.get(),merge_canv)
+    # time_m= time.time() - start_m
+    # drawData(dataM, ['green' for x in range(len(dataM))],merge_canv)
+    # merge_comp="No of comparisons for Merge Sort is {0}".format(comps_m)
+    # merge_time="Runtime Of Merge Sort is {0}".format(time_m)
+    # quick_comp="No of comparisons for Quick Sort is {0}".format(comps_q)
+    # quick_time="Runtime Of Quick Sort is {0}".format(time_q)
+    # msg=merge_comp+"\n"+merge_time+"\n"+q[0]+"\n"+q[1]+"\n"
+    # messagebox.showinfo(title="runtime and No of comparisons",message=msg)
 
 root = Tk()
 root.title('mergesort')
@@ -113,13 +150,8 @@ quick_canv = Canvas(root, bg='light pink')
 quick_canv.grid(row=1, column=1, padx=10, pady=5,ipady=5,sticky="nsew"  )
 
 #User Interface Area
-#Row[0]
-# Label(UI_frame, text="Algorithm: ", bg='grey').grid(row=0, column=0, padx=5, pady=5, sticky=W)
-# algMenu = ttk.Combobox(UI_frame, textvariable=selected_alg, values=['Bubble Sort', 'Quick Sort', 'Merge Sort'])
-# algMenu.grid(row=0, column=1, padx=5, pady=5)
-# algMenu.current(0)
 
-speedScale = Scale(UI_frame, from_=0.1, to=5.0, length=200, digits=2, resolution=0.2, orient=HORIZONTAL, label="Select Speed [s]")
+speedScale = Scale(UI_frame, from_=0.1, to=5.0, length=200, digits=2, resolution=0.05, orient=HORIZONTAL, label="Select Speed [s]")
 speedScale.grid(row=0, column=2, padx=5, pady=5,sticky="nsew")
 Button(UI_frame, text="Start", command=StartAlgorithm, bg='red').grid(row=0, column=3, padx=5, pady=5)
 
