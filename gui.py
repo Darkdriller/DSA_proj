@@ -108,22 +108,23 @@ def StartAlgorithm():
     if (not dataM or not dataQ): return
     threading.Thread(target=run_mergesort_in_bg).start()
     threading.Thread(target=run_quicksort_in_bg).start()
-    # start_q =time.time()
-    # comps_q=quick_sort(dataQ, 0, len(dataQ)-1, drawData, speedScale.get(),quick_canv,0)
-    # time_q= time.time() - start_q
-    # drawData(dataQ, ['gr  een' for x in range(len(dataQ))],quick_canv)
-    # q=run_quicksort_in_bg()
-    # start_m = time.time()
-    # comps_m=merge_sort(dataM, drawData, speedScale.get(),merge_canv)
-    # time_m= time.time() - start_m
-    # drawData(dataM, ['green' for x in range(len(dataM))],merge_canv)
-    # merge_comp="No of comparisons for Merge Sort is {0}".format(comps_m)
-    # merge_time="Runtime Of Merge Sort is {0}".format(time_m)
-    # quick_comp="No of comparisons for Quick Sort is {0}".format(comps_q)
-    # quick_time="Runtime Of Quick Sort is {0}".format(time_q)
-    # msg=merge_comp+"\n"+merge_time+"\n"+q[0]+"\n"+q[1]+"\n"
-    # messagebox.showinfo(title="runtime and No of comparisons",message=msg)
-
+    """ Ignore
+    start_q =time.time()
+    comps_q=quick_sort(dataQ, 0, len(dataQ)-1, drawData, speedScale.get(),quick_canv,0)
+    time_q= time.time() - start_q
+    drawData(dataQ, ['gr  een' for x in range(len(dataQ))],quick_canv)
+    q=run_quicksort_in_bg()
+    start_m = time.time()
+    comps_m=merge_sort(dataM, drawData, speedScale.get(),merge_canv)
+    time_m= time.time() - start_m
+    drawData(dataM, ['green' for x in range(len(dataM))],merge_canv)
+    merge_comp="No of comparisons for Merge Sort is {0}".format(comps_m)
+    merge_time="Runtime Of Merge Sort is {0}".format(time_m)
+    quick_comp="No of comparisons for Quick Sort is {0}".format(comps_q)
+    quick_time="Runtime Of Quick Sort is {0}".format(time_q)
+    msg=merge_comp+"\n"+merge_time+"\n"+q[0]+"\n"+q[1]+"\n"
+    messagebox.showinfo(title="runtime and No of comparisons",message=msg)
+    """
 root = Tk()
 root.title('mergesort')
 # root.maxsize(900, 600)
