@@ -6,10 +6,8 @@ import time
 import threading
 from quicksort import quick_sort
 from mergesort import merge_sort
-from multiprocessing.pool import ThreadPool
+# from multiprocessing.pool import ThreadPool
 
-#variables
-#selected_alg = StringVar()
 dataM = []
 dataQ = []
 #function
