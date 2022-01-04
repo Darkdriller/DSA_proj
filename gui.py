@@ -15,6 +15,7 @@ dataQ = []
 #     threading.Thread(target=drawDatax,args=(data, colorArray,canvas,)).start()
 def drawData(data, colorArray,canvas):
     canvas.delete("all")
+    # canvas.create_text(10,10,anchor=W , text='Quick-sort')
     c_height = canvas.winfo_height()
     c_width = canvas.winfo_width()
 
@@ -147,9 +148,9 @@ merge_canv = Canvas(root,bg='light pink')
 merge_canv.grid(row=1, column=0, padx=10, pady=5,ipady=10,sticky="nsew")
 quick_canv = Canvas(root, bg='light pink')
 quick_canv.grid(row=1, column=1, padx=10, pady=5,ipady=5,sticky="nsew"  )
-
+quick_canv.create_text(20,20,anchor=W , text='Quick-sort',font=('Helvetica','30','bold'))
 #User Interface Area
-
+merge_canv.create_text(20,20,anchor=W , text='Merge-sort',font=('Helvetica','30','bold'))
 speedScale = Scale(UI_frame, from_=0.01, to=5.0, length=200, digits=2, resolution=0.2, orient=HORIZONTAL, label="Select Speed [s]")
 speedScale.grid(row=0, column=2, padx=5, pady=5,sticky="nsew")
 Button(UI_frame, text="Start", command=StartAlgorithm, bg='red').grid(row=0, column=3, padx=5, pady=5)
